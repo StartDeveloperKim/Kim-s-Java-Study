@@ -8,8 +8,6 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StopWatch;
 
-import static java.lang.System.*;
-
 @Slf4j
 @Aspect
 @Component
@@ -19,8 +17,14 @@ public class PerformanceAspect {
     public void getArticleList() {
     }
 
-    @Around("getArticleList()")
+    @Pointcut("execution(* study.aspect.service.ArticleService.getArticleListPaging(..))")
+    public void getArticleListPaging() {
+
+    }
+
+    @Around("getArticleList() || getArticleListPaging()")
     public Object calculatePerformance(ProceedingJoinPoint proceedingJoinPoint) {
+
         Object result = null;
         StopWatch stopWatch = new StopWatch();
         try {

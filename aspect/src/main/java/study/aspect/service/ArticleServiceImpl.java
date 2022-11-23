@@ -2,6 +2,7 @@ package study.aspect.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import study.aspect.domain.Article;
@@ -21,5 +22,10 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> getArticleList() {
         return articleRepository.findAll();
+    }
+
+    @Override
+    public List<Article> getArticleListPaging(PageRequest request) {
+        return articleRepository.findAll(request).getContent();
     }
 }
