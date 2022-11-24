@@ -14,15 +14,18 @@ import org.springframework.util.StopWatch;
 public class PerformanceAspect {
 
     @Pointcut("execution(* study.aspect.service.ArticleService.getArticleList(..))")
-    public void getArticleList() {
-    }
+    public void getArticleList() {}
 
     @Pointcut("execution(* study.aspect.service.ArticleService.getArticleListPaging(..))")
-    public void getArticleListPaging() {
+    public void getArticleListPaging() {}
 
-    }
+    @Pointcut("execution(* study.aspect.service.ArticleService.saveAllArticleList(..))")
+    public void saveAllArticle() {}
 
-    @Around("getArticleList() || getArticleListPaging()")
+    @Pointcut("execution(* study.aspect.service.ArticleService.saveEachArticleList(..))")
+    public void savedEachArticle(){}
+
+    @Around("getArticleList() || getArticleListPaging() || saveAllArticle() || savedEachArticle()")
     public Object calculatePerformance(ProceedingJoinPoint proceedingJoinPoint) {
 
         Object result = null;

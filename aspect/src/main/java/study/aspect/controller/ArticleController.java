@@ -3,10 +3,7 @@ package study.aspect.controller;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import study.aspect.service.ArticleService;
 
@@ -29,6 +26,20 @@ public class ArticleController {
     public String getArticleListPaging(@PathVariable("page") int page) {
         log.info("getArticleListPaging");
         articleService.getArticleListPaging(PageRequest.of(page - 1, 10));
+        return "성공";
+    }
+
+    @PostMapping("/all")
+    public String saveAllArticle() {
+        log.info("saveAllArticle");
+        articleService.saveAllArticleList();
+        return "성공";
+    }
+
+    @PostMapping("/each")
+    public String saveEachArticle() {
+        log.info("savedEachArticle");
+        articleService.saveEachArticleList();
         return "성공";
     }
 }

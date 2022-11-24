@@ -10,4 +10,8 @@ public interface ArticleService {
     List<Article> getArticleList();
 
     List<Article> getArticleListPaging(PageRequest request);
+
+    void saveAllArticleList();
+
+    void saveEachArticleList();
 }
