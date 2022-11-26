@@ -2,6 +2,7 @@ package study.caching.service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,13 +23,15 @@ public class SchoolService {
     private final SchoolRepository schoolRepository;
 
     @Transactional(readOnly = true)
-    @Cacheable("school") // 캐시 데이터 저장 공간의 이름
+    @Cacheable("schoolCacheStore") // 캐시 데이터 저장 공간의 이름
     public List<School> getSchool() {
+        log.info("cacheable 실행");
+
         return schoolRepository.findAll();
     }
 
     @Transactional
-    @CachePut(value = "school")
+    @CacheEvict(value = "schoolCacheStore", allEntries = true)
     public void updateSchoolName(Long id, String name) {
         School school = schoolRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException("엔티티가 없습니다."));

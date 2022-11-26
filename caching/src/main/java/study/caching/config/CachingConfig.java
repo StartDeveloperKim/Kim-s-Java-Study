@@ -1,15 +1,21 @@
 package study.caching.config;
 
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.annotation.EnableCaching;
+import org.springframework.cache.concurrent.ConcurrentMapCacheManager;
 import org.springframework.cache.ehcache.EhCacheManagerFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
 @Configuration
+@EnableCaching
 public class CachingConfig {
 
     @Bean
-    public EhCacheManagerFactoryBean cacheManagerFactoryBean() {
-        return new EhCacheManagerFactoryBean();
+    public CacheManager cacheManager() {
+        return new ConcurrentMapCacheManager("schoolCacheStore");
     }
+
 
 
 }

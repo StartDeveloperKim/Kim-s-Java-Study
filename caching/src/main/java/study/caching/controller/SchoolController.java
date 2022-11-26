@@ -18,6 +18,7 @@ public class SchoolController {
 
     @GetMapping
     public List<School> getSchoolList() {
+        log.info("getSchoolList");
         return schoolService.getSchool();
     }
 

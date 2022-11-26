@@ -7,7 +7,6 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 @Getter
-/*@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)*/
 @Entity
 public class School {
 
