@@ -26,6 +26,7 @@ public class HelloController {
 
     @GetMapping("/ip-port")
     public String ipPort(@RequestParam IpPort ipPort) {
+        // 해당 기능을 사용하면 쿼리스트링으로 객체를 받을 수도 있다.
         System.out.println("ipPort = " + ipPort.toString());
         return "ok";
     }
